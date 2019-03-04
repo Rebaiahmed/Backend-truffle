@@ -1,0 +1,48 @@
+
+         food.getProductHistory(product.idProduct)
+         .then(function(data2){
+         console.log('data 2' + JSON.stringify(data2.length 
+          ) + '' + data2[3]);
+
+         let obj ={
+          'hardate' : data2[0],
+          'shipdate' : data2[1],
+         'retailerdate' : data2[2],
+         'FarmerAdress': data2[3] ,
+         'supplierAddress': data2[4],
+         'RetailerAddress' : data2[5],
+         'idSupplier' : data2[6],
+         'idRetiler' : data2[7],
+         'idFarmer' : data2[8]
+         }
+         
+
+       food.getCompanyById(data2[8],0)
+       .then(function(farmer){
+      
+        console.log('farme is' + JSON.stringify(farmer));
+
+
+        food.getCompanyById(data2[6],1)
+       .then(function(suplier){
+        console.log('supplier' + supplier);
+
+      }).catch(function(err){
+        console.log('err geeting farmer' +err);
+      })
+
+
+
+       }).catch(function(err){
+         console.log('err geeting farmer' +err);
+       })
+
+
+
+     
+
+         //callback({'product': obj});
+
+         }).catch(function(err2){
+           console.log('err' + err2);
+         })

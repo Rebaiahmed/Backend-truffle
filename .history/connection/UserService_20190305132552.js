@@ -159,7 +159,7 @@ async function addNotication(data) {
       console.log ("notification: "+notification.supplierName)
 
       dbo.collection("users").findOneAndUpdate(
-        { idSmart: data.idUser , Role: "Supplier" }, 
+        { idSmart: data.idUser }, { Role: "Supplier" },
         { $push: { notifications: notification }},
         { upsert: true },
         function(err, blogModels) {

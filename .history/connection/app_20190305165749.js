@@ -271,13 +271,13 @@ SendProductoSupplier: function( product,callback) {
 
           
           var io = global._io
-          //console.log('data to front-end' + JSON.stringify(data)); 
-          io.emit('RECEIVE_Notifcation',{'data': product })
+          console.log('data to front-end' + JSON.stringify(data)); 
+          io.emit('RECEIVE_Notifcation',{'data': data })
          
         
           Smsservices.SendSmsVerification("aa",20140428)
           .then(function(datasms){
-            //console.log('sms notf' + JSON.stringify(datasms));
+            console.log('sms notf' + JSON.stringify(datasms));
             callback(data);
 
           }).catch(function(err){

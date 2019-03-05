@@ -7,12 +7,10 @@ const authToken = 'd182cb5f397af450faf76196be37ca64';
 const client = require('twilio')(accountSid, authToken);
 
 
-module.exports = {
-  SendSmsVerification
-};
 
 
-function SendSmsVerification (code,phonenumber)
+
+exports.SendSmsVerification = function(code,phonenumber)
   {
 
  //__________Run our code as a Promise ( asynchronous code )
@@ -26,6 +24,7 @@ return new Promise((resolve, reject) => {
       from: '(707)368-4630',
       to: '+21620140428',
       body: "You got a new Product"
+      + "Do not share this code with anyone"
     },
     (err, message) => {
       console.log('message' + message);

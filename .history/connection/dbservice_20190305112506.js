@@ -22,6 +22,7 @@ const UserSchema = new Schema({
         read :{type: Boolean},
         description: {type: String},
         farmerName : {type : String},
+        supplierName: {type : String},
         produitName: {type : String}
     }
 

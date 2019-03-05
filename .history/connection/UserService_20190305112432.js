@@ -60,8 +60,7 @@ var user = new User({
 'phone' : userParam.phone ,
 'role' : userParam.role,
 'secretcode': code,
-'idSmart': 0,
-'notifications': []
+'idSmart': 0
 })
 
 
@@ -139,37 +138,25 @@ fs.readFile(img_name.path, "utf8", function(err, data) {
 //_______________________________//
 
 async function addNotication(data) {
-  var MongoClient = require('mongodb').MongoClient;
-  var url = "mongodb://localhost:27017/";
   
-  MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-     
-      var dbo = db.db("supplychai_nmeta_data");
       // do your updates here
       var notification = {
         'date': new Date() ,
         'read' : false ,
         'description' : data.description ,
         'farmerName' : data.farmerName,
+        'supplierName': data.supplierName,
         'produitName': data.produitName
       }
-      console.log ("notification: "+notification.description)
-      console.log ("notification: "+notification.farmerName)
-      console.log ("notification: "+notification.supplierName)
-
-      dbo.collection("users").findOneAndUpdate(
-        { idSmart: data.idUser , Role: "Supplier" }, 
-        { $push: { notifications: notification }},
-        { upsert: true },
-        function(err, blogModels) {
-          if (err) throw err;
-          console.log(blogModels);
-          db.close();
-        });
-      });
-
       
+      User.findOneAndUpdate(
+        { _id: data.idUser },
+        { $push: { notifications: notification }},
+        { safe: true, upsert: true },
+        function(err, blogModels) {
+          console.log ("add notif in db err "+ err)
+        });
+
     
 
 };

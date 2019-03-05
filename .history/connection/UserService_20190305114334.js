@@ -60,8 +60,7 @@ var user = new User({
 'phone' : userParam.phone ,
 'role' : userParam.role,
 'secretcode': code,
-'idSmart': 0,
-'notifications': []
+'idSmart': 0
 })
 
 
@@ -138,7 +137,7 @@ fs.readFile(img_name.path, "utf8", function(err, data) {
 
 //_______________________________//
 
-async function addNotication(data) {
+function addNotication(data) {
   var MongoClient = require('mongodb').MongoClient;
   var url = "mongodb://localhost:27017/";
   
@@ -152,6 +151,7 @@ async function addNotication(data) {
         'read' : false ,
         'description' : data.description ,
         'farmerName' : data.farmerName,
+        'supplierName': data.supplierName,
         'produitName': data.produitName
       }
       console.log ("notification: "+notification.description)
@@ -159,12 +159,12 @@ async function addNotication(data) {
       console.log ("notification: "+notification.supplierName)
 
       dbo.collection("users").findOneAndUpdate(
-        { idSmart: data.idUser , Role: "Supplier" }, 
+        { firstName: "Ahmed" },
         { $push: { notifications: notification }},
         { upsert: true },
         function(err, blogModels) {
           if (err) throw err;
-          console.log(blogModels);
+          console.log(result);
           db.close();
         });
       });

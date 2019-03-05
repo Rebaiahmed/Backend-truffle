@@ -580,7 +580,7 @@ self.web3.eth.defaultAccount=self.web3.eth.coinbase;
     });
     allEvents.watch((err, res) => {
 
-      //console.log('events')
+      console.log('events')
      // console.log(err, res);
       if(err) {
         console.log('err subsciption to event' + err);

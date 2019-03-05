@@ -14,8 +14,7 @@ const User= require('./dbservice');
 
 module.exports = {
   authenticate,
- signup,
- addNotication
+ signup
 };
 
 
@@ -60,8 +59,7 @@ var user = new User({
 'phone' : userParam.phone ,
 'role' : userParam.role,
 'secretcode': code,
-'idSmart': 0,
-'notifications': []
+'idSmart': 0
 })
 
 
@@ -139,45 +137,37 @@ fs.readFile(img_name.path, "utf8", function(err, data) {
 //_______________________________//
 
 async function addNotication(data) {
-  var MongoClient = require('mongodb').MongoClient;
-  var url = "mongodb://localhost:27017/";
-  
-  MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-     
-      var dbo = db.db("supplychai_nmeta_data");
+  User.findById(data.idUser, function(err, p) {
+    if (!p)
+      return next(new Error('Could not load Document'));
+    else {
       // do your updates here
       var notification = {
-        'date': new Date() ,
-        'read' : false ,
-        'description' : data.description ,
-        'farmerName' : data.farmerName,
-        'produitName': data.produitName
+        'idNotif': p.firstName ,
+        'date': p.lastName ,
+        'read' : p.email ,
+        'description' : p.phone ,
+        'farmerName' : p.role,
+        'supplierName': code,
+        'produitName': p.idSmart
       }
-      console.log ("notification: "+notification.description)
-      console.log ("notification: "+notification.farmerName)
-      console.log ("notification: "+notification.supplierName)
-
-      dbo.collection("users").findOneAndUpdate(
-        { idSmart: data.idUser , Role: "Supplier" }, 
-        { $push: { notifications: notification }},
-        { upsert: true },
-        function(err, blogModels) {
-          if (err) throw err;
-          console.log(blogModels);
-          db.close();
-        });
-      });
-
       
-    
+      Post.findOneAndUpdate(
+        { id: data.idUser },
+        { $push: { notification: notification }},
+        { safe: true, upsert: true },
+        function(err, blogModels) {
+          // Handle err
+          });
 
+    }
+  });
 };
 
 async function getById(id) {
   return await User.findById(id);
-};
+}
 
 async function getById(id) {
   return await User.findById(id);
-};
+}

@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     idSmart: { type: String  },
     lastName: { type: String, },
     createdDate: { type: Date, default: Date.now },
-    hash :{ type: String, },
+     hash :{ type: String, },
     email :{ type: String,  },
     password :{ type: String,  },
     address :{ type: String,  },
@@ -22,6 +22,7 @@ const UserSchema = new Schema({
         read :{type: Boolean},
         description: {type: String},
         farmerName : {type : String},
+        supplierName: {type : String},
         produitName: {type : String}
     }
 

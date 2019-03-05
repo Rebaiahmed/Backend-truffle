@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     idSmart: { type: String  },
     lastName: { type: String, },
     createdDate: { type: Date, default: Date.now },
-    hash :{ type: String, },
+     hash :{ type: String, },
     email :{ type: String,  },
     password :{ type: String,  },
     address :{ type: String,  },
@@ -17,12 +17,14 @@ const UserSchema = new Schema({
     activitySector :{ type: String },
     companyName :{ type: String,  },
     img: { data: Buffer, contentType: String },
-    notifications: {
-        date: {type : Date},
-        read :{type: Boolean},
-        description: {type: String},
-        farmerName : {type : String},
-        produitName: {type : String}
+    notification: {
+        idNotif:{type : Number},
+        date: {type : new Date()},
+        read :{type: boolean},
+        description,
+        farmerName,
+        supplierName,
+        produitName
     }
 
 });

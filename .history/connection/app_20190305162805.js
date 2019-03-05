@@ -21,9 +21,8 @@ var Products = contract(product_artifact);
 
 
 var services = require('./UserService.js');
-var Smsservices = require('./services');
+var smsservce =  require('./services.js');
 var mongoose = require('mongoose');
-
 
 
 
@@ -256,7 +255,7 @@ SendProductoSupplier: function( product,callback) {
    
       var id = mongoose.Types.ObjectId('5c7d43f52c4495523868c0e8');
 
-      console.log('produc to supplier ' + JSON.stringify(product));
+      console.log('produc to supplier ' + JSON.stringify(data));
       
       
         var data2 = {
@@ -267,17 +266,17 @@ SendProductoSupplier: function( product,callback) {
 
         }
 
-    
+        services.addNotication (data2)
+        .then (function(result){
 
-          
+          console.log('result ship ' + result);
           var io = global._io
-          //console.log('data to front-end' + JSON.stringify(data)); 
-          io.emit('RECEIVE_Notifcation',{'data': product })
-         
-        
-          Smsservices.SendSmsVerification("aa",20140428)
+          console.log('send reat')
+          io.emit('RECEIVE_Notifcation',{'data': data2 })
+
+          smsservce.SendSmsnotification("aa",20140428)
           .then(function(datasms){
-            //console.log('sms notf' + JSON.stringify(datasms));
+            console.log('sms notf' + JSON.stringify(datasms));
             callback(data);
 
           }).catch(function(err){
@@ -288,7 +287,10 @@ SendProductoSupplier: function( product,callback) {
 
 
          
-                                 
+            // callback(product);
+        }).catch(function(err3){
+          console.log('errr'+ err3);
+        })                            
 
         
   //_____________now add the new farmer______________//

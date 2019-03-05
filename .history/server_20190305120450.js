@@ -534,7 +534,7 @@ var server = app.listen(port, () => {
 //_____initialize socket to be used for realtime functions _______________//
 io = socket(server);
 
-global._io = io;
+
 //______open connection________
 io.on('connection', (socket) => {
 
@@ -580,8 +580,8 @@ self.web3.eth.defaultAccount=self.web3.eth.coinbase;
     });
     allEvents.watch((err, res) => {
 
-      //console.log('events')
-     // console.log(err, res);
+      console.log('events')
+      console.log(err, res);
       if(err) {
         console.log('err subsciption to event' + err);
       }

@@ -271,7 +271,7 @@ SendProductoSupplier: function( product,callback) {
 
           
           var io = global._io
-          //console.log('data to front-end' + JSON.stringify(data)); 
+          console.log('data to front-end' + JSON.stringify(data)); 
           io.emit('RECEIVE_Notifcation',{'data': product })
          
         

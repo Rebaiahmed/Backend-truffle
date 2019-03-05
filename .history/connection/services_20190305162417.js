@@ -7,12 +7,10 @@ const authToken = 'd182cb5f397af450faf76196be37ca64';
 const client = require('twilio')(accountSid, authToken);
 
 
-module.exports = {
-  SendSmsVerification
-};
 
 
-function SendSmsVerification (code,phonenumber)
+
+exports.SendSmsVerification = function(code,phonenumber)
   {
 
  //__________Run our code as a Promise ( asynchronous code )

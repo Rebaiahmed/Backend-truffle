@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Codes</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        img{
+            width: 100%;
+        }
+        div img{
+            width: 50%;
+        }
+    </style>
+    <script src="qrcode.js"></script>
+</head>
+<body>
+    <header>
+        <h1>QR Codes</h1>
+    </header>
+    <main>
+       <!-- using
+       https://davidshimjs.github.io/qrcodejs/
+       -->
+        <div id="output"></div>
+        <img src="qrcode-encoding.png" />
+    </main>    
+    <script>
+        var data = {
+            'idUser': ""+18,
+            'description': "this is a description here" ,
+            'farmerName' : "hhhh",
+            'supplierName': "sahhhhlah",
+            'produitName': "hhhhhhh"
+        
+        }
+        let qrcode = new QRCode("output", {
+            json: data,
+            width: 177,
+            height: 177,
+            colorDark : "#990000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        
+        document.body.addEventListener('click', ()=>{
+            qrcode.clear(); 
+            qrcode.makeCode("http://google.ca/"); 
+        })
+        
+    </script>
+</body>
+</html>
